@@ -79,6 +79,7 @@ io.on('connection',function(socket){
         var bullet = new Bullet();
         
         bullet.name='Bullet';
+        bullet.activator=data.activator;
         bullet.position.x=data.position.x;
         bullet.position.y=data.position.y;
         bullet.direction.x=data.direction.x;
@@ -89,6 +90,7 @@ io.on('connection',function(socket){
         var returnData={
             name:bullet.name,
             id:bullet.id,
+            activator:bullet.activator,
             position:{
                 x:bullet.position.x,
                 y:bullet.position.y
@@ -103,6 +105,16 @@ io.on('connection',function(socket){
         socket.broadcast.emit('ServerSpawn',returnData);
     });
    
+    socket.on('collisionDestroy',function(data){
+        console.log('Collision bullet ID:'+data.id);
+        let returnBullets=bullets.filter(bullet=>{
+            return bullet.id==data.id
+        });
+        //tek girdi 
+        returnBullets.forEach(bullet =>{
+            bullet.isDestroyed=true;
+        });
+    });
 
     socket.on('disconnect',function(){
     console.log('Bir oyuncu cikis yapti');
