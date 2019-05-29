@@ -65,9 +65,6 @@ io.on('connection',function(socket){
         
         socket.broadcast.emit('updatePosition',player);
     });
-    socket.on('collisionDestroy',function(data){
-
-    });
     socket.on('updateRotation',function(data){
         player.rotation=data.rotation;
         socket.broadcast.emit('updateRotation',player);
@@ -84,7 +81,7 @@ io.on('connection',function(socket){
         bullet.position.y=data.position.y;
         bullet.direction.x=data.direction.x;
         bullet.direction.y=data.direction.y;
-
+        console.log(bullet.isDestroyed);
         bullets.push(bullet);
 
         var returnData={

@@ -13,7 +13,6 @@ module.exports=class Bullet extends ServerObject{
 
         this.position.x += this.direction.x * this.speed;
         this.position.y += this.direction.y * this.speed;
-
-        return isDestroyed;
+        return this.isDestroyed;
     }
 }
