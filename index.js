@@ -102,7 +102,6 @@ io.on('connection',function(socket){
         socket.emit('ServerSpawn',returnData);
         socket.broadcast.emit('ServerSpawn',returnData);
     });
-
    
 
     socket.on('disconnect',function(){
